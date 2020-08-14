@@ -15,7 +15,7 @@ namespace MinimalADB
 {
     public partial class Form1 : Form
     {
-        var filePath = string.Empty;
+        string filePath = string.Empty;
 
         public Form1()
         {
@@ -31,6 +31,10 @@ namespace MinimalADB
             process.Start();
 
             string output = process.StandardOutput.ReadToEnd(); process.WaitForExit();
+
+            process.Close();
+
+
 
             textBox1.Text = output;
             textBox2.Text = "Select the file...";
@@ -50,7 +54,7 @@ namespace MinimalADB
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/c adb devices";
             startInfo.RedirectStandardOutput = true;
@@ -59,7 +63,7 @@ namespace MinimalADB
             process.Start();
 
             string output = process.StandardOutput.ReadToEnd(); process.WaitForExit();
-
+            process.Close();
             textBox1.Text = output;
         }
 
@@ -71,7 +75,7 @@ namespace MinimalADB
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "Rom zip (*.zip)|*.zip|Rom image (*.img)|*.img|All files (*.*)|*.*";
+                openFileDialog.Filter = "Rom image (*.img)|*.img|Rom zip (*.zip)|*.zip|All files (*.*)|*.*";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
 
@@ -100,7 +104,7 @@ namespace MinimalADB
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/c adb sideload" + filePath;
+            startInfo.Arguments = "/c adb sideload \""+filePath+"\"" ;
             startInfo.RedirectStandardOutput = true;
             startInfo.UseShellExecute = false;
             process.StartInfo = startInfo;
@@ -108,7 +112,33 @@ namespace MinimalADB
 
             string output = process.StandardOutput.ReadToEnd(); process.WaitForExit();
 
-            textBox1.Text = output;
+            process.Close();
+
+            textBox1.Text = textBox1.Text + output;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/c " + textBox3.Text;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.UseShellExecute = false;
+            process.StartInfo = startInfo;
+            process.Start();
+
+            string output = process.StandardOutput.ReadToEnd(); process.WaitForExit();
+
+            process.Close();
+
+            textBox3.Text = "";
+
+
+
+
+            textBox1.Text = textBox1.Text + output;
         }
     }
 }
