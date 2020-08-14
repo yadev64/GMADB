@@ -1,0 +1,10 @@
+C:\Users\Iris\source\repos\MinimalADB\MinimalADB\bin\Debug\MinimalADB.exe.config
+C:\Users\Iris\source\repos\MinimalADB\MinimalADB\bin\Debug\MinimalADB.exe
+C:\Users\Iris\source\repos\MinimalADB\MinimalADB\bin\Debug\MinimalADB.pdb
+C:\Users\Iris\source\repos\MinimalADB\MinimalADB\obj\Debug\MinimalADB.csprojAssemblyReference.cache
+C:\Users\Iris\source\repos\MinimalADB\MinimalADB\obj\Debug\MinimalADB.Form1.resources
+C:\Users\Iris\source\repos\MinimalADB\MinimalADB\obj\Debug\MinimalADB.Properties.Resources.resources
+C:\Users\Iris\source\repos\MinimalADB\MinimalADB\obj\Debug\MinimalADB.csproj.GenerateResource.cache
+C:\Users\Iris\source\repos\MinimalADB\MinimalADB\obj\Debug\MinimalADB.csproj.CoreCompileInputs.cache
+C:\Users\Iris\source\repos\MinimalADB\MinimalADB\obj\Debug\MinimalADB.exe
+C:\Users\Iris\source\repos\MinimalADB\MinimalADB\obj\Debug\MinimalADB.pdb
