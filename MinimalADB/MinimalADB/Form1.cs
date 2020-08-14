@@ -15,7 +15,7 @@ namespace MinimalADB
 {
     public partial class Form1 : Form
     {
-        
+        var filePath = string.Empty;
 
         public Form1()
         {
@@ -66,7 +66,7 @@ namespace MinimalADB
         private void button2_Click(object sender, EventArgs e)
         {
             var fileContent = string.Empty;
-            var filePath = string.Empty;
+            
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -90,8 +90,25 @@ namespace MinimalADB
                 }
             }
 
-            MessageBox.Show("File: " + filePath, "File selected.",  MessageBoxButtons.OK);
+            /*MessageBox.Show("File: " + filePath, "File selected.",  MessageBoxButtons.OK);*/
             textBox2.Text = filePath;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/c adb sideload" + filePath;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.UseShellExecute = false;
+            process.StartInfo = startInfo;
+            process.Start();
+
+            string output = process.StandardOutput.ReadToEnd(); process.WaitForExit();
+
+            textBox1.Text = output;
         }
     }
 }
