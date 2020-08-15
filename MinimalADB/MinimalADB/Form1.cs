@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace MinimalADB
 {
@@ -107,15 +108,21 @@ namespace MinimalADB
             startInfo.Arguments = "/c adb sideload \""+filePath+"\"" ;
             startInfo.RedirectStandardOutput = true;
             startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardError = true;
             process.StartInfo = startInfo;
             process.Start();
 
             string output = process.StandardOutput.ReadToEnd(); process.WaitForExit();
+            string err = process.StandardError.ReadToEnd();
 
             process.Close();
 
             textBox1.Text = textBox1.Text + output;
+            textBox1.Text = textBox1.Text + err;
         }
+
+
+
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -126,17 +133,18 @@ namespace MinimalADB
             startInfo.Arguments = "/c " + textBox3.Text;
             startInfo.RedirectStandardOutput = true;
             startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardError = true;
             process.StartInfo = startInfo;
             process.Start();
 
             string output = process.StandardOutput.ReadToEnd(); process.WaitForExit();
+            string err = process.StandardError.ReadToEnd();
 
             process.Close();
 
             textBox3.Text = "";
 
-
-
+            textBox1.Text = textBox1.Text + err;
 
             textBox1.Text = textBox1.Text + output;
         }
