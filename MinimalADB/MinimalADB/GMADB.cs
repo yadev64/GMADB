@@ -8,17 +8,19 @@ using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 
 namespace MinimalADB
 {
-    public partial class Form1 : Form
+    public partial class GMADB : Form
     {
         string filePath = string.Empty;
+        string[] outerr = new string[2];
 
-        public Form1()
+        public GMADB()
         {
             InitializeComponent();
             System.Diagnostics.Process process = new System.Diagnostics.Process();
@@ -39,6 +41,13 @@ namespace MinimalADB
 
             textBox1.Text = output;
             textBox2.Text = "Select the file...";
+
+            button3.Enabled = false;
+            button3.BackColor = Color.LightGreen;
+            this.MaximizeBox = false;
+
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -66,6 +75,7 @@ namespace MinimalADB
             string output = process.StandardOutput.ReadToEnd(); process.WaitForExit();
             process.Close();
             textBox1.Text = output;
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -93,19 +103,37 @@ namespace MinimalADB
                         fileContent = reader.ReadToEnd();
                     }*/
                 }
+
+                
+
             }
 
             /*MessageBox.Show("File: " + filePath, "File selected.",  MessageBoxButtons.OK);*/
             textBox2.Text = filePath;
+
+            if (textBox2.Text != "")
+            {
+                button3.Enabled = true;
+                button3.BackColor = Color.LawnGreen;
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            /*ThreadStart childref = new ThreadStart(Flasher_Thread);
+            textBox1.Text = textBox1.Text + "=================Starting Flasher===================\n";
+            Thread childThread = new Thread(childref);
+            
+
+            childThread.Start();*/
+
+            textBox1.Text = textBox1.Text + "\n=================Starting Flasher===================";
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/c adb sideload \""+filePath+"\"" ;
+            startInfo.Arguments = "/c adb sideload \"" + filePath + "\"";
             startInfo.RedirectStandardOutput = true;
             startInfo.UseShellExecute = false;
             startInfo.RedirectStandardError = true;
@@ -117,8 +145,11 @@ namespace MinimalADB
 
             process.Close();
 
-            textBox1.Text = textBox1.Text + output;
-            textBox1.Text = textBox1.Text + err;
+            outerr[0] = output;
+            outerr[1] = err;
+
+            textBox1.Text = textBox1.Text + outerr[0];
+            textBox1.Text = textBox1.Text + outerr[1];
         }
 
 
@@ -128,7 +159,7 @@ namespace MinimalADB
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/c " + textBox3.Text;
             startInfo.RedirectStandardOutput = true;
@@ -147,6 +178,39 @@ namespace MinimalADB
             textBox1.Text = textBox1.Text + err;
 
             textBox1.Text = textBox1.Text + output;
+        }
+
+
+
+
+        public void Flasher_Thread()
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/c adb sideload \"" + filePath + "\"";
+            startInfo.RedirectStandardOutput = true;
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardError = true;
+            process.StartInfo = startInfo;
+            process.Start();
+
+            string output = process.StandardOutput.ReadToEnd(); process.WaitForExit();
+            string err = process.StandardError.ReadToEnd();
+
+            process.Close();
+
+            outerr[0] = output;
+            outerr[1] = err;
+
+            
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            linkLabel1.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/yadev64/GMADB");
         }
     }
 }
