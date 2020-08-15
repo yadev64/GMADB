@@ -18,3 +18,8 @@ C:\Users\Iris\Documents\GitHub\GMADB\MinimalADB\MinimalADB\obj\Debug\MinimalADB.
 C:\Users\Iris\Documents\GitHub\GMADB\MinimalADB\MinimalADB\obj\Debug\MinimalADB.exe
 C:\Users\Iris\Documents\GitHub\GMADB\MinimalADB\MinimalADB\obj\Debug\MinimalADB.pdb
 C:\Users\Iris\Documents\GitHub\GMADB\MinimalADB\MinimalADB\obj\Debug\MinimalADB.GMADB.resources
+C:\Users\Iris\Documents\GitHub\GMADB\MinimalADB\MinimalADB\bin\Debug\MinimalADB.exe.manifest
+C:\Users\Iris\Documents\GitHub\GMADB\MinimalADB\MinimalADB\bin\Debug\MinimalADB.application
+C:\Users\Iris\Documents\GitHub\GMADB\MinimalADB\MinimalADB\obj\Debug\MinimalADB.exe.manifest
+C:\Users\Iris\Documents\GitHub\GMADB\MinimalADB\MinimalADB\obj\Debug\MinimalADB.application
+C:\Users\Iris\Documents\GitHub\GMADB\MinimalADB\MinimalADB\obj\Debug\MinimalADB.TrustInfo.xml

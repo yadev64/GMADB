@@ -173,6 +173,30 @@ namespace MinimalADB
 
             process.Close();
 
+
+            /*while (process.StandardOutput.ReadLine() == null)
+           {
+               string op = process.StandardOutput.ReadLine();
+               output = output + op;
+               textBox1.Text = textBox1.Text + op;
+           }*/
+
+            /*while ((standard_output = process.StandardOutput.ReadLine()) != null)
+            {
+                //standard_output = process.StandardOutput.ReadLine();
+                *//*if (standard_output.Contains("xx"))
+                {
+                    //do something
+
+                    break;
+                }*//*
+                op = process.StandardOutput.ReadLine();
+                output = output + op;
+                textBox1.Text = textBox1.Text + op;
+
+
+            }*/
+
             textBox3.Text = "";
 
             textBox1.Text = textBox1.Text + err;
